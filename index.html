@@ -102,16 +102,17 @@
 </section>
 
 
-<!-- Teaser (muted autoplay loop) -->
+<!-- Method GIF -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4" type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">VANDERER</span> explores an unseen environment from monocular images,
-        steering a diffusion policy with a visual-curiosity signal &mdash; no occupancy map required.
+      <img src="./static/images/method_gif.gif" alt="VANDERER architecture overview" style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered" style="margin-top: 1.25rem;">
+        A pre-trained diffusion policy proposes candidate action sequences from monocular
+        observations. The <b>Visual Curiosity Module</b> rolls each candidate forward through a
+        navigation world model and scores it with a curiosity cost; this cost guides the diffusion
+        denoising process toward actions that maximize exploration &mdash; all without building an
+        explicit occupancy map.
       </h2>
     </div>
   </div>
@@ -150,22 +151,13 @@
 </section>
 
 
-<!-- Method -->
+<!-- Visual Curiosity Module -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
-        <h2 class="title is-3">Method</h2>
-        <img src="./static/images/method.png" alt="VANDERER architecture overview" style="width: 100%; height: auto;">
-        <div class="content has-text-justified" style="margin-top: 1.25rem;">
-          <p>
-            A pre-trained diffusion policy proposes candidate action sequences from monocular
-            observations. The <b>Visual Curiosity Module</b> rolls each candidate forward through a
-            navigation world model and scores it with a curiosity cost; this cost guides the diffusion
-            denoising process toward actions that maximize exploration &mdash; all without building an
-            explicit occupancy map.
-          </p>
-        </div>
+        <h2 class="title is-3">Visual Curiosity Module</h2>
+        <img src="./static/images/carbon.png" alt="Visual Curiosity Module" style="width: 70%; height: auto;">
       </div>
     </div>
   </div>
@@ -173,7 +165,7 @@
 
 
 <!-- Overview Video -->
-<section class="section" id="video">
+<!-- <section class="section" id="video">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -186,7 +178,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 <!-- Qualitative Results carousel -->
@@ -201,30 +193,22 @@
       </div>
     </div>
 
-    <div id="results-carousel" class="carousel results-carousel">
-      <div class="item item-bev">
-        <video autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/rollout_bev.mp4" type="video/mp4">
-        </video>
-        <p class="has-text-centered">Bird's-eye exploration trace</p>
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="item item-bev">
+          <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+            <source src="./static/videos/rollout_bev.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered">Bird's-eye exploration trace</p>
+        </div>
       </div>
-      <div class="item item-pov">
-        <video autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/rollout_pov.mp4" type="video/mp4">
-        </video>
-        <p class="has-text-centered">Agent point-of-view rollout</p>
-      </div>
-      <div class="item item-s">
-        <video autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/rollout_s.mp4" type="video/mp4">
-        </video>
-        <p class="has-text-centered">Exploration rollout</p>
-      </div>
-      <div class="item item-r">
-        <video autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/rollout_r.mp4" type="video/mp4">
-        </video>
-        <p class="has-text-centered">Exploration rollout</p>
+      <div class="column is-half">
+        <div class="item item-pov">
+          <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+            <source src="./static/videos/rollout_pov.mp4" type="video/mp4">
+          </video>
+          <p class="has-text-centered">Agent point-of-view rollout</p>
+        </div>
       </div>
     </div>
   </div>
