@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="VANDERER: Map-Free Exploration using Future-Aware and Visual-Curiosity-Guided Diffusion Policy. A monocular exploration framework that guides pre-trained diffusion policies with a Visual Curiosity Module, exploring 13.4% more area than NoMaD.">
+  <meta name="keywords" content="VANDERER, exploration, diffusion policy, visual curiosity, navigation, robotics, NoMaD, world model, monocular">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VANDERER: Map-Free Exploration using a Visual-Curiosity-Guided Diffusion Policy</title>
+
+  <!-- Social / link preview -->
+  <meta property="og:title" content="VANDERER: Map-Free Exploration using a Visual-Curiosity-Guided Diffusion Policy">
+  <meta property="og:description" content="A monocular exploration framework that guides pre-trained diffusion policies with a Visual Curiosity Module, exploring 13.4% more area than NoMaD.">
+  <meta property="og:image" content="./static/images/method.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="./static/images/method.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">VANDERER: Map-Free Exploration using Future-Aware and Visual-Curiosity-Guided Diffusion Policy</h1>
+
+          <!-- TODO: replace with real author names, links, and affiliation superscripts -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Author One</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Two</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Author Three</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Your Affiliation</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Paper PDF -->
+              <span class="link-block">
+                <a href="./static/pdfs/VANDERER.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv (TODO: add link) -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video -->
+              <span class="link-block">
+                <a href="#video"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-video"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code (TODO: add repo link) -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser (muted autoplay loop) -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">VANDERER</span> explores an unseen environment from monocular images,
+        steering a diffusion policy with a visual-curiosity signal &mdash; no occupancy map required.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Mobile agents require efficient exploration strategies to map unseen environments and
+            autonomously plan tasks. Traditional methods rely on generating occupancy maps and
+            optimizing the sequence in which unexplored regions are visited. However, in
+            sensor-constrained settings, such as those limited to monocular cameras, generating
+            accurate occupancy maps is challenging. To address this, we propose
+            <span class="dnerf">VANDERER</span>, an exploration framework that leverages a Visual
+            Curiosity Module (VCM) to guide pre-trained diffusion policies using only monocular image
+            data. This curiosity module predicts the outcomes of proposed actions via a navigation
+            world model and evaluates them through a curiosity cost. The cost then guides the
+            diffusion process toward generating actions that maximize exploration. Evaluated across
+            diverse simulated environments, <span class="dnerf">VANDERER</span> consistently
+            outperforms established baselines, exploring an average of <b>13.4% more area than
+            NoMaD</b>. Our results reveal a direct correlation between visual and geometric curiosity
+            in outdoor environments, demonstrating that <span class="dnerf">VANDERER</span> can
+            effectively leverage this relationship for efficient exploration using sensor-constrained
+            agents.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Method</h2>
+        <img src="./static/images/method.png" alt="VANDERER architecture overview" style="width: 100%; height: auto;">
+        <div class="content has-text-justified" style="margin-top: 1.25rem;">
+          <p>
+            A pre-trained diffusion policy proposes candidate action sequences from monocular
+            observations. The <b>Visual Curiosity Module</b> rolls each candidate forward through a
+            navigation world model and scores it with a curiosity cost; this cost guides the diffusion
+            denoising process toward actions that maximize exploration &mdash; all without building an
+            explicit occupancy map.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Overview Video -->
+<section class="section" id="video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview Video</h2>
+        <div class="publication-video">
+          <video controls playsinline>
+            <source src="./static/videos/overview.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Qualitative Results carousel -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <h2 class="title is-3">Qualitative Results</h2>
+        <div class="content has-text-justified">
+          <p>Exploration rollouts produced by <span class="dnerf">VANDERER</span> in simulation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="results-carousel" class="carousel results-carousel">
+      <div class="item item-bev">
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/rollout_bev.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered">Bird's-eye exploration trace</p>
+      </div>
+      <div class="item item-pov">
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/rollout_pov.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered">Agent point-of-view rollout</p>
+      </div>
+      <div class="item item-s">
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/rollout_s.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered">Exploration rollout</p>
+      </div>
+      <div class="item item-r">
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/rollout_r.mp4" type="video/mp4">
+        </video>
+        <p class="has-text-centered">Exploration rollout</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{vanderer2026,
+  title   = {VANDERER: Map-Free Exploration using Future-Aware and Visual-Curiosity-Guided Diffusion Policy},
+  author  = {TODO: Author One and Author Two and Author Three},
+  journal = {TODO},
+  year    = {2026}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is based on the
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page template,
+            licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
